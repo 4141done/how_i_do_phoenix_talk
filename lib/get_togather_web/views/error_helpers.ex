@@ -30,4 +30,13 @@ defmodule GetTogatherWeb.ErrorHelpers do
       Gettext.dgettext(GetTogatherWeb.Gettext, "errors", msg, opts)
     end
   end
+
+  def translate_ecto_changeset(changeset) do
+    changeset
+    |> Ecto.Changeset.traverse_errors(fn {msg, opts} ->
+      Enum.reduce(opts, msg, fn {key, value}, acc ->
+        String.replace(acc, "%{#{key}}", to_string(value))
+      end)
+    end)
+  end
 end
