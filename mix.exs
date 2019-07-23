@@ -38,6 +38,7 @@ defmodule GetTogather.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:ecto, "~> 3.1"},
+      {:params, "~> 2.1"},
       {:mix_test_watch, "~> 0.9", only: :dev, runtime: false}
     ]
   end

@@ -5,7 +5,7 @@ defmodule GetTogatherWeb.ErrorViewTest do
   import Phoenix.View
 
   test "renders 404.json" do
-    assert render(GetTogatherWeb.ErrorView, "404.json", []) == %{errors: %{detail: "Not Found"}}
+    assert render(GetTogatherWeb.ErrorView, "404.json", []) == %{message: "Not Found"}
   end
 
   test "renders 500.json" do

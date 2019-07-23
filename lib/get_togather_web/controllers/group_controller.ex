@@ -1,8 +1,8 @@
 defmodule GetTogatherWeb.GroupController do
   use GetTogatherWeb, :controller
+  use Params
   alias GetTogather.Meetups
   alias GetTogather.Meetups.Group
-  alias GetTogatherWeb.GroupShowParams, as: ShowParams
 
   action_fallback GetTogatherWeb.FallbackController
 
@@ -10,10 +10,14 @@ defmodule GetTogatherWeb.GroupController do
     render(conn, "index.json", groups: Meetups.list_groups())
   end
 
+  defparams show_params %{
+    id!: :integer
+  }
+
   def show(conn, params) do
-    changeset = ShowParams.changeset(%ShowParams{}, params)
+    changeset = show_params(params)
     with {:params_valid, true} <- {:params_valid, changeset.valid?},
-         {:id_fetch, {:changes, id}} <- {:id_fetch, Ecto.Changeset.fetch_field(changeset, :id)},
+         %{id: id} <- Params.to_map(changeset),
          %Group{} = group <- Meetups.get_group(id) do
 
       render(conn, "show.json", group: group)
@@ -21,9 +25,6 @@ defmodule GetTogatherWeb.GroupController do
     else
       {:params_valid, false} ->
         {:error, changeset}
-      {:id_fetch, :error} ->
-        # This will never be hit because ecto makes sure that the id must be present and an integer
-        {:error, "Id must be an integer"}
       error ->
         {:error, inspect(error)}
     end

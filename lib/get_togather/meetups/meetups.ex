@@ -6,7 +6,7 @@ defmodule GetTogather.Meetups do
 
   def list_groups() do
     Storage.get_resource(:groups)
-    |> Enum.sort(fn g1, g2 -> g1.updated_at <= g2.updated_at end)
+    |> Enum.sort(&(NaiveDateTime.compare(&1.updated_at, &2.updated_at) == :lt))
     |> Enum.take(3)
   end
 

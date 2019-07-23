@@ -9,7 +9,7 @@ defmodule GetTogather.MeetupsTest do
     test "list_groups/0 returns the most recently updated three groups by default" do
       expected = ["Seattle Elixir Meetup", "Portland Elixir Meetup", "East Olympia Snake Painters"]
 
-      assert expected = Meetups.list_groups() |> Enum.map(&Map.get(&1, :name))
+      assert ^expected = Meetups.list_groups() |> Enum.map(&Map.get(&1, :name))
     end
 
     test "get_group/1 returns the group with the correct_id" do
