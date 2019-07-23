@@ -7,6 +7,10 @@ defmodule GetTogatherWeb.GroupView do
     }
   end
 
+  def render("show.json", %{group: group}) do
+    render_one(group, __MODULE__, "group.json", as: :group)
+  end
+
   # The key in the second argument is normally inferred from the view name
   def render("group.json", %{group: group}) do
     %{

@@ -9,5 +9,6 @@ defmodule GetTogatherWeb.Router do
     pipe_through :api
 
     get "/groups", GroupController, :index
+    get "/groups/:id", GroupController, :show
   end
 end
