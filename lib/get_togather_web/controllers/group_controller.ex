@@ -4,6 +4,8 @@ defmodule GetTogatherWeb.GroupController do
   alias GetTogather.Meetups.Group
   alias GetTogatherWeb.GroupShowParams, as: ShowParams
 
+  action_fallback GetTogatherWeb.FallbackController
+
   def index(conn, _params) do
     render(conn, "index.json", groups: Meetups.list_groups())
   end
