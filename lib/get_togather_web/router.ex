@@ -7,5 +7,7 @@ defmodule GetTogatherWeb.Router do
 
   scope "/api", GetTogatherWeb do
     pipe_through :api
+
+    get "/groups", GroupController, :index
   end
 end
